@@ -1,0 +1,172 @@
+int Solution::solve(string A) {
+    unordered_map<int,int>map;
+    for(int i=0;i<A.size();i++){
+        map[A[i]]++;
+    }
+    int count=0;
+    for(auto i:map){
+        if(i.second%2!=0){
+            count++;
+            if(count>1){
+                return 0;
+            }     
+        }
+    }
+    return 1;
+}
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        vector<int>ans;
+        unordered_map<int,int>map;
+        for(auto i:nums){
+            map[i]++;
+            if(map[i]==2)
+                ans.push_back(i);
+            else
+                continue;
+        }
+        return ans;
+        
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& matches) {
+        unordered_map<int,int>map;
+        vector<vector<int>> ans(2);
+        for(int i=0;i<matches.size();i++){
+           for(int j=0;j<2;j++){
+               if(map.find(matches[i][j]) == map.end())
+                    map[matches[i][j]]=0;
+                if(j==1)
+                    map[matches[i][j]]++;
+           }
+            
+        }
+        for(auto i:map){
+            if(i.second==0)
+               ans[0].push_back(i.first);
+            else if(i.second==1)
+               ans[1].push_back(i.first);
+        }
+        sort(ans[0].begin(),ans[0].end());
+        sort(ans[1].begin(),ans[1].end());
+        return ans;
+        
+    }
+};
+
+int Solution::solve(vector<int> &A) {
+    unordered_map<int,int>mp;
+    for(auto i:A){
+        mp[i]++;
+    }
+    for(auto i:A){
+        if(mp[i]>1)
+          return i;
+    }
+return -1;
+}
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        unordered_map<ListNode*,int>map;
+        ListNode* ptr=headA;
+        while(ptr!=NULL){
+            map[ptr]++;
+            ptr=ptr->next;
+        }  
+        while(headB!=NULL){
+            if(map[headB]==1){
+                return headB;
+            }
+            headB=headB->next;
+        } 
+        if(headA==headB)
+           return headB;
+        return NULL;
+        }
+          
+   
+};
+
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        unordered_map<char,int>map;
+        int count=0;
+        for(int i=0;i<stones.size();i++)
+            map[stones[i]]++;
+        for(int i=0;i<jewels.size();i++){
+            count+=map[jewels[i]];
+        }
+        return count;    
+    }
+};
+
+class Solution {
+public:
+    string kthDistinct(vector<string>& arr, int k) {
+        unordered_map<string,int>map;
+        for(string i:arr){
+             map[i]++;
+        }
+        string s="";
+        for(auto i:arr){
+            if(map[i]==1)
+               k--;
+            if(k==0)
+               return i;
+        }
+        return s;
+    }
+};
+
+class Solution {
+public:
+    int numIdenticalPairs(vector<int>& nums) {
+        unordered_map<int,int>map;
+        int ans=0;
+        for(int i:nums)
+            map[i]++;
+        for(auto i:map){
+            if(i.second>1){
+                int count=i.second;
+                ans=ans+((count*(count-1))/2);
+            }
+            else
+               continue;
+        } 
+        return ans; 
+    }
+};
+
+class Solution {
+public:
+    int sumOfUnique(vector<int>& nums) {
+        unordered_map<int,int>map;
+        int sum=0;
+        for(auto i:nums)
+            map[i]++;
+        for(auto i:map){
+            if(i.second==1)
+                sum+=i.first;
+            else
+                continue;
+        }
+        return sum;
+        
+    }
+};
